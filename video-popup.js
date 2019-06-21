@@ -1,8 +1,11 @@
 var isVideoDisplayed = false;
+//start all ids with "ᙳ嬇㬾".
 const videoTemplate = 
-"<video id='popupvideo' width='320' height='240 controls>" +
-"<source src='vidsrc' type'video/mp4'>" +
-"</video>";
+"<video id='ᙳ嬇㬾popupvideo' width='320' height='240'>" +
+"<source src='vidsrc' type='video/mp4'>" +
+"</video>" +
+"<button id='ᙳ嬇㬾skipbutton' style='display:none'>skip</button>"
+;
 
 function VideoPopup(url, size, shouldSkip = false) {
     if(typeof size === 'string') {
@@ -41,9 +44,47 @@ function VideoPopup(url, size, shouldSkip = false) {
         if(hasHeight && hasWidth) {
             size = {width:size.width, height:size.height};
             document.body.innerHTML += videoTemplate.replace('vidsrc', url);
+            isVideoDisplayed = true;
+            var hasVideoMetadataLoaded = false;
+            var video = document.getElementById('ᙳ嬇㬾popupvideo');
+            video.play();
+            var shouldTestForMetadataLoad = true;
+            function onMetadataLoaded() {
+                if(video.duration <= 5) {
+                    shouldSkip = false;
+                } else if(shouldSkip) {
+                    var videoSkipPoint = video.duration - 5;
+                    var videoEnded = false;
+                    var skipButton = document.getElementById('ᙳ嬇㬾skipbutton');
+                    if(!videoEnded) {
+                        setInterval(function() {
+                        if(video.currentTime >= videoSkipPoint) {
+                            skipButton.style.display = 'inline-block';
+                        }
+                    }, 20);
+                    }
+                    
+                }
+            }
         }
     } else {
         console.error('VideoPopup size is not a string or an object. It can be a string (ex. "medium"), or an object (ex. {width:512, height:288})');
     }
+    video.onended = function() {
+        videoEnded = true;
+    }
+    video.onloadedmetadata = function() {
+        if(shouldTestForMetadataLoad) {
+            onMetadataLoaded();
+        } else {
+            setTimeout(function() {
+                if(shouldTestForMetadataLoad) {
+                    onMetadataLoaded();
+                }
+            }, 20);
+        }
+        
+    }
 }
+
 

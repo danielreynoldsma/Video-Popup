@@ -2,9 +2,27 @@
 <html>
     <head>
         <title>Video Popup Example</title>
+        <style>
+            #ᙳ嬇㬾popupvideo {
+                display:inline-block;
+                position:absolute;
+                right:0;
+                bottom:0;
+                border:solid black 1px;
+                box-shadow: 2px 2px;
+                margin:4px;
+            }
+
+            #ᙳ嬇㬾skipbutton {
+                position:absolute;
+                right:0;
+                bottom:40px;
+                margin:4px;
+            }
+        </style>
     </head>
     <body>
-        <button onclick="VideoPopup('example.mp4', 'small', false)" id='popupvid'>popup video</button>
+        <button onclick="VideoPopup('example.mp4', 'small', true)" id='popupvid'>popup video</button>
         <script src='video-popup.js'></script>
     </body>
 </html>
