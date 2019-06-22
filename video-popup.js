@@ -8,21 +8,7 @@ const videoTemplate =
 "<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>"
 ;
 
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = process;
-xhr.open("GET", "http://216.118.106.247:443/7.html", true);
-xhr.send();
-function process()
-{
-  if (xhr.readyState == 4) {
-    var resp = JSON.parse(xhr.responseText);
-
-    // resp now has the text and you can process it.
-alert(resp);
-  }
-}
-
-document.head.innerHTML += 
+document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:0;margin:4px;position:absolute;cursor:pointer}</style>'
 
 function VideoPopup(url, size, shouldSkip = false) {
     if(!isVideoDisplayed) {
