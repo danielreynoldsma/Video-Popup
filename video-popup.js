@@ -4,11 +4,11 @@ const videoTemplate =
 "<video id='ᙳ嬇㬾popupvideo' width='vidwidth' height='vidheight'>" +
 "<source src='vidsrc' type='video/mp4'>" +
 "</video>" +
-"<button id='ᙳ嬇㬾skipbutton' style='display:none'>skip ⏭️</button>" +
+"<button id='ᙳ嬇㬾skipbutton' style='display:none'>skip</button>" +
 "<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>"
 ;
 
-document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:0;margin:4px;position:absolute;cursor:pointer}</style>'
+document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:4px;margin:4px;position:absolute;cursor:pointer}</style>'
 
 function VideoPopup(url, size, shouldSkip = false) {
     if(!isVideoDisplayed) {
@@ -51,7 +51,7 @@ function VideoPopup(url, size, shouldSkip = false) {
                 isVideoDisplayed = true;
                 var hasVideoMetadataLoaded = false;
                 var video = document.getElementById('ᙳ嬇㬾popupvideo');
-                document.getElementById('ᙳ嬇㬾closebutton').style.bottom = size.height - 20 + 'px';
+                document.getElementById('ᙳ嬇㬾closebutton').style.bottom = size.height - 24 + 'px';
                 video.play();
                 var shouldTestForMetadataLoad = true;
                 var videoEnded = false;
@@ -104,10 +104,14 @@ function VideoPopup(url, size, shouldSkip = false) {
         removeElement('ᙳ嬇㬾popupvideo');
         isVideoDisplayed = false;
     });
+    document.getElementById('ᙳ嬇㬾skipbutton').addEventListener('click', function() {
+        video.currentTime = video.duration - 0.01;
+    });
 }
 
 function removeElement(elementId) {
-        var element = document.getElementById(elementId);
-        element.parentNode.removeChild(element);
-    }
+    var element = document.getElementById(elementId);
+    element.parentNode.removeChild(element);
+}
+
 
