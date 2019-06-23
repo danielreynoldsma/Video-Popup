@@ -1,14 +1,16 @@
 var isVideoDisplayed = false;
 //start all ids with "ᙳ嬇㬾", so as not to mix up with other ids.
 const videoTemplate = 
+"<div id='ᙳ嬇㬾videowrapper'>" +
 "<video id='ᙳ嬇㬾popupvideo' width='vidwidth' height='vidheight'>" +
 "<source src='vidsrc' type='video/mp4'>" +
 "</video>" +
 "<button id='ᙳ嬇㬾skipbutton' style='display:none'>skip</button>" +
-"<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>"
+"<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>" +
+"</div>"
 ;
 
-document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:4px;margin:4px;position:absolute;cursor:pointer}</style>'
+document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:4px;margin:4px;position:absolute;cursor:pointer}#ᙳ嬇㬾videowrapper{position:fixed;right:0;bottom:0}</style>'
 
 function VideoPopup(url, size, shouldSkip = false) {
     if(!isVideoDisplayed) {
@@ -79,6 +81,7 @@ function VideoPopup(url, size, shouldSkip = false) {
         }
         video.onended = function() {
             videoEnded = true;
+            document.getElementById('ᙳ嬇㬾skipbutton').style.display = 'none';
         }
         var i = 0;
         video.onloadedmetadata = function() {
@@ -102,6 +105,7 @@ function VideoPopup(url, size, shouldSkip = false) {
         removeElement('ᙳ嬇㬾closebutton');
         removeElement('ᙳ嬇㬾skipbutton');
         removeElement('ᙳ嬇㬾popupvideo');
+        removeElement('ᙳ嬇㬾videowrapper');
         isVideoDisplayed = false;
     });
     document.getElementById('ᙳ嬇㬾skipbutton').addEventListener('click', function() {

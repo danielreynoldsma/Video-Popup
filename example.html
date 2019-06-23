@@ -4,7 +4,15 @@
         <title>Video Popup Example</title>
     </head>
     <body>
-        <button onclick="VideoPopup('example.mp4', 'small', true)" id='popupvid'>Popup Video</button>
+        <h1>Simple Video Popup Demo</h1>
+        <p>Format: VideoPopup(url, size, shouldSkip = false);</p>
+        <p>url: string - the url to the video. (mp4 only, for now)</p>
+        <p>size: string - "small", "medium", or "large", or object with width and height values.</p>
+        <p>shouldSkip: boolean - if the skip button should appear with 5 seconds remaining. (videos less than 5 seconds long will not appear)</p>
+        <button onclick="VideoPopup('example.mp4', 'small', true)" id='popupvid'>VideoPopup('example.mp4', 'small', true)</button> <br>
+        <button onclick="VideoPopup('example.mp4', 'medium', false)" id='popupvid'>VideoPopup('example.mp4', 'medium', false)</button> <br>
+        <button onclick="VideoPopup('example.mp4', {width:100, height:245}, true)" id='popupvid'>VideoPopup('example.mp4', {width:100, height:245}, true)</button> <br>
+        <button onclick="VideoPopup('example.mp4', {width:260, height:190}, false)" id='popupvid'>VideoPopup('example.mp4', {width:260, height:190}, false)</button> <br>
         <script src='video-popup.js'></script>
     </body>
 </html>
