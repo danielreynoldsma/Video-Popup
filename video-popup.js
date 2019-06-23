@@ -1,16 +1,16 @@
 var isVideoDisplayed = false;
-//start all ids with "ᙳ嬇㬾", so as not to mix up with other ids.
+//start all ids with "videopopup-", so as not to mix up with other ids.
 const videoTemplate = 
-"<div id='ᙳ嬇㬾videowrapper'>" +
-"<video id='ᙳ嬇㬾popupvideo' width='vidwidth' height='vidheight'>" +
+"<div id='videopopup-videowrapper'>" +
+"<video id='videopopup-popupvideo' width='vidwidth' height='vidheight'>" +
 "<source src='vidsrc' type='video/mp4'>" +
 "</video>" +
-"<button id='ᙳ嬇㬾skipbutton' style='display:none'>skip</button>" +
-"<div style='display:none' id='ᙳ嬇㬾closebutton'>x</div>" +
+"<button id='videopopup-skipbutton' style='display:none'>skip</button>" +
+"<div style='display:none' id='videopopup-closebutton'>x</div>" +
 "</div>"
 ;
 
-document.head.innerHTML += '<style>#ᙳ嬇㬾popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#ᙳ嬇㬾skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#ᙳ嬇㬾closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:4px;margin:4px;position:absolute;cursor:pointer}#ᙳ嬇㬾videowrapper{position:fixed;right:0;bottom:0}</style>'
+document.head.innerHTML += '<style>#videopopup-popupvideo{display:inline-block;position:absolute;right:0;bottom:0;border:solid #000 1px;box-shadow:2px 2px;margin:4px}#videopopup-skipbutton{position:absolute;right:0;margin:0;width:80px;height:36px;background-color:#666666DD;margin:4px;border:none;cursor:pointer}#videopopup-closebutton{border-radius:50%;color:#fff;background-color:#000;width:20px;height:20px;text-align:center;font-family:Arial,Helvetica,sans-serif;right:4px;margin:4px;position:absolute;cursor:pointer}#videopopup-videowrapper{position:fixed;right:0;bottom:0}</style>'
 
 function VideoPopup(url, size, shouldSkip = false) {
     if(!isVideoDisplayed) {
@@ -52,8 +52,8 @@ function VideoPopup(url, size, shouldSkip = false) {
                 document.body.innerHTML += videoTemplate.replace('vidsrc', url).replace('vidwidth', size.width).replace('vidheight', size.height);
                 isVideoDisplayed = true;
                 var hasVideoMetadataLoaded = false;
-                var video = document.getElementById('ᙳ嬇㬾popupvideo');
-                document.getElementById('ᙳ嬇㬾closebutton').style.bottom = size.height - 24 + 'px';
+                var video = document.getElementById('videopopup-popupvideo');
+                document.getElementById('videopopup-closebutton').style.bottom = size.height - 24 + 'px';
                 video.play();
                 var shouldTestForMetadataLoad = true;
                 var videoEnded = false;
@@ -62,7 +62,7 @@ function VideoPopup(url, size, shouldSkip = false) {
                         shouldSkip = false;
                     } else if(shouldSkip) {
                         var videoSkipPoint = video.duration - 5;
-                        var skipButton = document.getElementById('ᙳ嬇㬾skipbutton');
+                        var skipButton = document.getElementById('videopopup-skipbutton');
                         if(!videoEnded) {
                             if(video.currentTime >= videoSkipPoint) {
                                 skipButton.style.bottom = size.height/6 + 'px';
@@ -72,7 +72,7 @@ function VideoPopup(url, size, shouldSkip = false) {
                                 
                     }
                     if(videoEnded) {
-                        document.getElementById('ᙳ嬇㬾closebutton').style.display = 'inline-block';
+                        document.getElementById('videopopup-closebutton').style.display = 'inline-block';
                     }  
                 }
             }
@@ -81,7 +81,7 @@ function VideoPopup(url, size, shouldSkip = false) {
         }
         video.onended = function() {
             videoEnded = true;
-            document.getElementById('ᙳ嬇㬾skipbutton').style.display = 'none';
+            document.getElementById('videopopup-skipbutton').style.display = 'none';
         }
         var i = 0;
         video.onloadedmetadata = function() {
@@ -101,14 +101,14 @@ function VideoPopup(url, size, shouldSkip = false) {
             
         }
     }
-    document.getElementById('ᙳ嬇㬾closebutton').addEventListener('click', function() {
-        removeElement('ᙳ嬇㬾closebutton');
-        removeElement('ᙳ嬇㬾skipbutton');
-        removeElement('ᙳ嬇㬾popupvideo');
-        removeElement('ᙳ嬇㬾videowrapper');
+    document.getElementById('videopopup-closebutton').addEventListener('click', function() {
+        removeElement('videopopup-closebutton');
+        removeElement('videopopup-skipbutton');
+        removeElement('videopopup-popupvideo');
+        removeElement('videopopup-videowrapper');
         isVideoDisplayed = false;
     });
-    document.getElementById('ᙳ嬇㬾skipbutton').addEventListener('click', function() {
+    document.getElementById('videopopup-skipbutton').addEventListener('click', function() {
         video.currentTime = video.duration - 0.01;
     });
 }
