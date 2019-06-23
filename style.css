@@ -1,4 +1,4 @@
-#ᙳ嬇㬾popupvideo {
+#videopopup-popupvideo {
     display:inline-block;
     position:absolute;
     right:0;
@@ -9,7 +9,7 @@
     background-color:white;
 }
 
-#ᙳ嬇㬾skipbutton {
+#videopopup-skipbutton {
     position:absolute;
     right:0;
     margin:0px;
@@ -20,7 +20,7 @@
     border:none;
     cursor:pointer;
 }
-#ᙳ嬇㬾closebutton {
+#videopopup-closebutton {
     border-radius:50%;
     color:white;
     background-color:black;
@@ -34,7 +34,7 @@
     cursor:pointer;
 }
 
-#ᙳ嬇㬾videowrapper {
+#videopopup-videowrapper {
     position:fixed;
     right:0;
     bottom:0;
